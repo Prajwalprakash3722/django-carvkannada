@@ -1,6 +1,6 @@
 from django.http import FileResponse
 from django.shortcuts import render
-# from django.core.paginator import Paginator
+from django.core.paginator import Paginator
 from .models import Post
 # Create your views here.
 
@@ -18,14 +18,13 @@ def achievements(request):
 def blog(request):
     if request.method == 'GET':
         posts = Post.objects.all()
-    #     paginator = Paginator(posts, 5)
-    # try:
-    #     page_number = request.GET('page', 1)
-
-    #     page_obj = paginator.get_page(page_number)
-
-    # except:
-    #     page_obj = paginator.get_page(1)
+        paginator = Paginator(posts, 2)
+        page_number = request.GET.get('page', 1)
+        print('no of pages {0}'.format(paginator.num_pages))
+        try:
+            posts = paginator.page(page_number)
+        except EmptyPage:
+            posts = paginator.page(1)
         return render(request, 'blog.html', {'posts': posts})
 
 
