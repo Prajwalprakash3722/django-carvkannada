@@ -77,6 +77,22 @@
                 </div>
             </article>
             {% endfor %}
+            <div class="w-full flex pt-6">
+                {% if posts.has_previous %}
+                <a href="/blog?page={{posts.previous_page_number}}"
+                    class="w-1/2 bg-white shadow hover:shadow-md text-left p-6">
+                    <p class="text-md text-blue-600 font-bold flex items-center"><i class="fas fa-arrow-left pr-1"></i>
+                        Previous Page</p>
+                </a>
+                {% endif %}
+                {% if posts.has_next %}
+                <a href="/blog?page={{posts.next_page_number}}"
+                    class="w-1/2 bg-white shadow hover:shadow-md text-right p-6">
+                    <p class="text-md text-blue-600 font-bold flex items-center justify-end">Next Page<i
+                            class="fas fa-arrow-right pl-1"></i></p>
+                </a>
+                {% endif %}
+            </div>
         </section>
 
         <!-- Sidebar Section -->
